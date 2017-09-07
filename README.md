@@ -172,3 +172,26 @@ add_shortcode( 'prefix_form', 'prefix_form_sc' );
 </script>
 
 ```
+
+## Recibir peticiones ajax
+
+https://codex.wordpress.org/Plugin_API/Action_Reference/wp_ajax_(action)
+
+Para recibir la petición ajax que enviamos del formulario debemos crear en nuestro tema una función ajax de wordpress.
+
+```PHP
+<?php
+
+add_action( 'wp_ajax_nopriv_contact_store', 'contact_store' );
+add_action( 'wp_ajax_contact_store', 'contact_store' );
+
+function contact_store() {
+  $res = $_POST['data'];
+  //Aquí podriamos enviar un mail o guardar la info en la base de datos.
+
+  header('Content-type: application/json');
+  echo json_encode($res);
+  die();
+}
+
+```
