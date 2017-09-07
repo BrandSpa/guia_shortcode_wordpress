@@ -94,10 +94,12 @@ function prefix_form_sc( $atts ) {
     $("#<?php echo $at['form_name'] ?>").on('submit', function(event) {
       event.preventDefault();
 
-      var data = $(this).serialize();
+      var formData = $(this).serialize();
+      var data = {action: 'store_contact', data: dataForm};
 
       $.ajax({
         url: '<?php echo $at['url_action'] ?>',
+        type: 'POST',
         data: data
       })
       .then(function(res) {
