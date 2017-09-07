@@ -143,16 +143,18 @@ add_shortcode( 'prefix_form', 'prefix_form_sc' );
   //Cuando se oprima click en el boton del formuario
   $("#contacto").on('submit', function(event) {
     /*
-      Previene que la acción por defecto no se ejecute
+      Previene que la acción por defecto no se ejecute;
       en este caso que el formulario no refresque el navegador.
     */
     event.preventDefault();
+
     /*
       $(this) es igual a $("#contacto")
       serialize agarra todos los campos del formulario y los transforma
       en información para enviar al servidor.
     */
     var data = $(this).serialize();
+
     /*
       ajax envia una petición asincrónica al servidor
       cuando el servidor contesta la funcion then se
@@ -160,6 +162,7 @@ add_shortcode( 'prefix_form', 'prefix_form_sc' );
     */
     $.ajax({
       url: 'http://localhost/wp-admin/admin-ajax.php',
+      type: 'POST',
       data: data
     })
     .then(function(res) {
