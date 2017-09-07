@@ -114,7 +114,13 @@ add_shortcode( 'prefix_form', 'prefix_form_sc' );
 ```
 
 ```
-  [prefix_form form_name="contacto" action_url="http://localhost/wp-admin/admin-ajax.php" placeholder_name="Nombre" placeholder_lastname="Apellido" btn_text="Enviar" ]
+  [prefix_form
+    form_name="contacto"
+    action_url="http://localhost/wp-admin/admin-ajax.php"
+    placeholder_name="Nombre"
+    placeholder_lastname="Apellido"
+    btn_text="Enviar"
+  ]
 ```
 
 ```html
