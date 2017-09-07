@@ -64,11 +64,11 @@ add_shortcode( 'prefix_form', 'prefix_form_sc' );
 
 function prefix_form_sc( $atts ) {
     $at = shortcode_atts( array(
+      'form_name' => '',
       'url_action' => '#',
       'placeholder_name' => '',
       'placeholder_lastname' => '',
-      'btn_text' => '',
-      'form_name' => ''
+      'btn_text' => ''
     ), $atts );
 
   ob_start();
@@ -111,4 +111,41 @@ function prefix_form_sc( $atts ) {
 }
 
 add_shortcode( 'prefix_form', 'prefix_form_sc' );
+```
+
+```
+  [prefix_form form_name="contacto" action_url="http://localhost/wp-admin/admin-ajax.php" placeholder_name="Nombre" placeholder_lastname="Apellido" btn_text="Enviar" ]
+```
+
+```html
+<form id="contacto" action="http://localhost/wp-admin/admin-ajax.php">
+  <input
+    type="text"
+    placeholder="<?php echo $at['placeholder_name']  ?>"
+    name="name"
+  />
+  <input
+    type="text"
+    placeholder="<?php echo $at['placeholder_lastname']  ?>"
+    name="lastname"
+  />
+  <button><?php echo $at['btn_text'] ?></button>
+</form>
+
+<script>
+  $("#contacto").on('submit', function(event) {
+    event.preventDefault();
+
+    var data = $(this).serialize();
+
+    $.ajax({
+      url: 'http://localhost/wp-admin/admin-ajax.php',
+      data: data
+    })
+    .then(function(res) {
+      console.log(res);
+    });
+  });
+</script>
+
 ```
